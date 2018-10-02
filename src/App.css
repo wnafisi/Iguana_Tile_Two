@@ -15,7 +15,7 @@
   position: relative;
   left: 1000px;
   background: url('/images/back.png');
-  border: inset 9px rgb(74, 47, 47);
+  border: inset 9px rgb(104, 63, 63);
 }
 .board img {
   display: block;
@@ -145,4 +145,35 @@
   border: inset 9px rgb(122, 195, 244);
 }
 
+/* GAUGE */
 
+.gauge{
+  width: 200px;
+	height: 581px;
+	transform: skewY(-20deg);
+  background: rgb(255, 245, 245);
+  border: 1px solid black;
+  z-index: 1;
+  position: absolute;
+  right: 600px;
+  top: 37px;
+}
+.tracker{
+  max-width: 10px;
+  min-height: 10px;
+  background-color: rgb(126, 255, 100);
+  margin: 530px 0px 0px 100px;
+
+}
+
+.gauge2{
+  width: 200px;
+	height: 581px;
+	transform: skewY(20deg);
+  background: rgb(255, 245, 245);
+  border: 1px solid black;
+  z-index: 1;
+  position: absolute;
+  left: 600px;
+  top: 37px;
+}

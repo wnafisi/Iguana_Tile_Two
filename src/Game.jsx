@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import WinnerPopUp from './WinnerPopUp';
+import Gauge from "./Gauge";
 
 class Game extends Component {
     constructor(props) {
@@ -9,12 +10,15 @@ class Game extends Component {
             tileValues: [0, 1, 2, 3, 4, 5, 6, 7, 8],
             randomizedValues: [],
             clickedTile: [],
-            isWinnner: false
+            isWinnner: false,
+            greenTop: 530,
+            greenLeft: 100,
+            newMove: 0
         }
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(tileId){
-        this.setState({ clickedTile: tileId });
+        this.setState({ clickedTile: tileId, newMove: (this.state.newMove + 1) });
         this.basicCheck(tileId);
         this.checkForWinner();
     }
@@ -133,6 +137,7 @@ class Game extends Component {
             || zero === 6 && index === 7
             || zero === 7 && index === 8) {
             indexImg.className = "move-left";
+            this.setState({greenLeft: (this.state.greenLeft -= 10) })
             console.log(indexImg)
         } else if (zero === 1 && index === 0 
             || zero === 2 && index === 1 
@@ -141,6 +146,7 @@ class Game extends Component {
             || zero === 7 && index === 6
             || zero === 8 && index === 7) {
             indexImg.className = "move-right";
+            this.setState({greenRight: (this.state.greenLeft += 10) })
             console.log(indexImg)
         } else if (zero === 0 && index === 3 
             || zero === 1 && index === 4 
@@ -149,6 +155,7 @@ class Game extends Component {
             || zero === 4 && index === 7
             || zero === 5 && index === 8) {
             indexImg.className += "slideInUp";
+            this.setState({greenTop: (this.state.greenTop -= 10) })
         } else if (zero === 6 && index === 3 
             || zero === 7 && index === 4 
             || zero === 8 && index === 5
@@ -156,6 +163,7 @@ class Game extends Component {
             || zero === 4 && index === 1
             || zero === 5 && index === 2) {
             indexImg.className += "slideDown";
+            this.setState({greenBottom: (this.state.greenTop += 10) })
         }
         if (index !== -1) {
             random[index] = 0;
@@ -208,6 +216,12 @@ class Game extends Component {
     return(
         <div>
             {this.showWinner()}
+        <Gauge 
+            top={this.state.greenTop}
+            left={this.state.greenLeft}
+            newMove={this.state.newMove}
+            tileValues={this.state.randomizedValues}
+        />
         <Board 
             tileValues={this.state.randomizedValues}
             handleClick={this.handleClick}
